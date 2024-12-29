@@ -1,0 +1,95 @@
+---
+title: "Women as Policymakers"
+author: "Julieta Pappano"
+date: "2022-Jan-10"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(AER)
+library(ggplot2)
+library(stargazer)
+library(viridis) 
+library(broom)
+library(knitr)
+library(kableExtra)
+```
+
+## Introduction
+
+Chattopadhyay and Duflo (2004) studied the effect of reserving leadership positions for women in Village Councils (Gram Panchayat or GP henceforth) in India. The underlying assumption of the authors was that depending on the gender of leaders, the type of public goods prioritized would differ. To test this hypothesis they took advantage of a natural experiment conducted in India, in which quotas were introduced in different regions at different points in time. As such, they collected data on 265 Village Councils in West Bengal and Rajasthan and compared he type of public goods prioritized by councils with reserved and unreserved positions. Their findings were presented in their famous paper "Women as Policy Makers: Evidence from a Randomized Policy Experiment in India". A subset of their data can be accessed as part of the supplementary materials of the book "Quantitative Social Science: An Introduction", published by Princeton University Press in 2017 and authored by Kosuke Imai.
+
+This dataset contains information about the Birbhum district in the state of West Bengal, it includes 6 variables and 322 observations. The "reserved" variable is the treatment variable and it indicates whether there were quotas for woman in the Village Council. The variable "female" indicates whether the leader was a woman or not, irrespective of the quota. The variables "GP" refers to the number of leaders and "village" refer the location in which the data was collected. Lastly, "irrigation" and "water" are the outcome variables.
+
+```{r, echo=FALSE}
+women = read.csv("women.csv")
+
+women_summary <- summary(women)
+women_summary %>%
+  kable(format = "latex", caption = "Summary of Dataset") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), latex_options = "HOLD_position")
+
+```
+
+## Covariate Analysis
+
+Considering the dataset and the context of the experiment, the following causal relationships can be considered.
+
+![Potential covariates affecting the impact model.](G:\Mi%20unidad\Educacion\Data\R%20Projects\images\Image1.png)
+
+The villages selected are the subjects of the experiment. Aside from water and irrigation (outcome variables), there are no other observable covariates in the dataset. However, it should be noted that there may be unobserved pre-treatment covariates affecting the causal relationship. For instance, the population of each village, income level or education of its population, among others, could affect policy outcomes since the needs of each GP may differ based on them. For instance, villages with lower incomes might have higher needs for water/irrigation facilities. Thus, this could potentially affect the treatment since the reservation policy might not be particularly relevant for water and irrigation in such cases. Furthermore, in a village with more educated people, gender gaps might be reduced so women are already accessing leadership positions, which in turn would affect the treatment as well. However, since Chattopadhyay and Duflo take advantage of a randomized policy experiment, model dependence and covariate imbalances are reduced and do not interfere with causality. When the treatment is randomized, observed and unobserved covariates are balanced, and, on average, the control and treatment groups are similar.
+
+![Randomization effect on covariates.](G:\Mi%20unidad\Educacion\Data\R%20Projects\images\Image2.png)
+
+## Treatment Effect
+
+There are two ways to calculate the average treatment effect:
+
+1.  Calculate the difference between the average outcome of the control group and the average outcome of the treatment.
+
+Firstly, the difference between the mean of the variable "water" when positions are reserved for women (reserved=1) and the average of "water" when positions are not reserved for women (reserved=0) should be calculated.
+
+Result:
+
+```{r echo=FALSE}
+mean(women$water[women$reserved == 1]) -
+  mean(women$water[women$reserved == 0])
+```
+
+Similarly, the difference between the mean of the variable "irrigation" when positions are reserved and not reserved should be calculated.
+
+Result:
+
+```{r echo=FALSE}
+mean(women$irrigation[women$reserved == 1]) -
+  mean(women$irrigation[women$reserved == 0])
+```
+
+2.  Check the regression coefficients. Since it's a randomized experiment with balanced covariates these coefficients are good approximates to the average treatment effect.
+
+```{r echo=FALSE,results='asis'}
+mod1_w=lm(water~reserved, data=women)
+mod2_w=lm(irrigation~reserved, data=women)
+
+stargazer(mod1_w,mod2_w,
+                          header = FALSE,
+                          type = "latex", 
+                          covariate.labels = c("Reserved",  "Intercept"),
+                          dep.var.labels = c("Water", "Irrigation"),
+                          notes.align = "l",
+                          label = "tab:regression_models",
+                          title= "Regression Model Comparison")
+
+```
+
+These results mean that when women are represented in the Pradhan, there is an increase of 9.25 new or repaired drinking water facilities in the village when compared to villages that do not have a woman in said position. On the other hand, there is a decrease of 0.37 new or repaired irrigation facilities in the village with a female Chief, when compared to villages with male leaders. However, it should be noted that in the second case, the coefficient is not significant.
+
+As previously mentioned, since the case under analysis corresponds to a randomized experiment, it is not necessary to include the covariates to calculate the treatment effects because randomization helps to achieve an unbiased causal relationship. However, controls could be incorporated into the model in order to increase its statistical precision, particularly for the case of irrigation in which the coefficient is not significant. For this case, additional measurements of unobserved covariates should be added to the dataset such as the average income of each village or the average education levels.
+
+## References
+
+-   Imai, K. (2017). Quantitative social science: an introduction. Princeton: Princeton University Press.
+
+-   Chattopadhyay, R., & Duflo, E. (2004). Women as policy makers: Evidence from a randomized policy experiment in India. Econometrica: Journal of the Econometric Society, 72(5), 1409--1443. <doi:10.1111/j.1468-0262.2004.00539.x>
