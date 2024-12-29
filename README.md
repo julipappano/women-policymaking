@@ -30,7 +30,9 @@ The treatment effect was assessed using both mean differences and regression coe
 
 ## Project Structure
 analysis/: Contains the main RMarkdown file (Women_Policymakers_Analysis.Rmd) and the generated report in PDF format.
+
 data/: Dataset files (not included due to licensing restrictions).
+
 figures/: Visualizations generated during the analysis, including graphs of treatment effects and covariate balance.
 
 ## Getting Started
@@ -55,6 +57,7 @@ install.packages(c("tidyverse", "ggplot2", "dplyr", "knitr", "rmarkdown"))
 
 ## References
 Chattopadhyay, R., & Duflo, E. (2004). Women as policymakers: Evidence from a randomized policy experiment in India. Econometrica, 72(5), 1409–1443. doi:10.1111/j.1468-0262.2004.00539.x
+
 Imai, K. (2017). Quantitative social science: An introduction. Princeton: Princeton University Press.
 
 ## Author
