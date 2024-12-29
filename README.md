@@ -59,4 +59,4 @@ Imai, K. (2017). Quantitative social science: An introduction. Princeton: Prince
 
 ## Author
 Julieta Pappano
-Data Analyst and Public Policy Specialist, passionate about the intersection of gender, leadership, and public policy.
+Data Analyst and Public Policy Specialist, with a keen interest in leveraging data analysis to address policy and economic challenges.
