@@ -28,13 +28,6 @@ Randomization effectively balanced observed and unobserved covariates between tr
 
 The treatment effect was assessed using both mean differences and regression coefficients, leveraging the randomized experimental design to ensure unbiased causal estimates.
 
-## Project Structure
-analysis/: Contains the main RMarkdown file (Women_Policymakers_Analysis.Rmd) and the generated report in PDF format.
-
-data/: Dataset files (not included due to licensing restrictions).
-
-images/: Graphs describing potential confounding variables.
-
 ## Getting Started
 1. Clone this repository:
 git clone https://github.com/username/Women-Policymakers-Analysis.git
