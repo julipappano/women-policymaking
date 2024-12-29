@@ -33,7 +33,7 @@ analysis/: Contains the main RMarkdown file (Women_Policymakers_Analysis.Rmd) an
 
 data/: Dataset files (not included due to licensing restrictions).
 
-figures/: Visualizations generated during the analysis, including graphs of treatment effects and covariate balance.
+images/: Graphs describing potential confounding variables.
 
 ## Getting Started
 1. Clone this repository:
