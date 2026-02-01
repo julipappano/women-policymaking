@@ -1,5 +1,5 @@
 # Women as Policymakers: Analyzing Gender-Based Quotas in Leadership
-This repository contains an analysis of the Women as Policymakers dataset, exploring the impact of leadership quotas for women in Indian village councils on the provision of public goods. The study is based on Chattopadhyay and Duflo's (2004) influential research and leverages a randomized policy experiment to establish causal relationships.
+This repository contains an analysis of the Women as Policymakers dataset, exploring the impact of leadership quotas for women in Indian village councils on the provision of public goods. The exercise is based on Chattopadhyay and Duflo's (2004) influential research and leverages a randomized policy experiment to establish causal relationships.
 
 ## Project Overview
 The analysis aims to:
