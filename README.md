@@ -54,6 +54,5 @@ Chattopadhyay, R., & Duflo, E. (2004). Women as policymakers: Evidence from a ra
 Imai, K. (2017). Quantitative social science: An introduction. Princeton: Princeton University Press.
 
 ## Author
-Julieta Pappano
-
-Policy and Innovation Specialist
+Julieta Pappano  
+_Policy and Innovation Specialist_
